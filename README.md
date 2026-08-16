@@ -2,10 +2,6 @@
   <img src="./markshift-icon-rounded.png" width="160" height="160" alt="Markshift app icon">
 </p>
 
-<h1 align="center">Mark<p align="center">
-  <img src="Design/markshift-icon-rounded.png" width="128" height="128" alt="Markshift app icon">
-</p>
-
 <h1 align="center">Markshift</h1>
 
 <p align="center">
@@ -56,7 +52,7 @@ The app uses Apple's system frameworks for PDF processing, text recognition and 
 
 ## Download and install
 
-Download the latest Mac DMG from [GitHub Releases](../../releases/latest).
+Download [Markshift 1.0.1 for macOS](./Markshift-1.0.1-macOS.dmg).
 
 1. Open `Markshift-1.0.1-macOS.dmg`.
 2. Drag **Markshift** into **Applications**.
@@ -128,5 +124,3 @@ Contact: [kamalgeek92@gmail.com](mailto:kamalgeek92@gmail.com)
 ## Copyright
 
 Copyright © 2026 Kamalanarayanan, CRIT Studio. All rights reserved.
-
-See [COPYRIGHT.md](COPYRIGHT.md) for the complete copyright and brand notice.
