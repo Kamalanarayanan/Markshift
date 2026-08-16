@@ -1,3 +1,4 @@
+<img src="markshift-icon-rounded.png" width="128" height="128" alt="Markshift app icon">
 <p align="center">
   <img src="Design/markshift-icon-rounded.png" width="128" height="128" alt="Markshift app icon">
 </p>
