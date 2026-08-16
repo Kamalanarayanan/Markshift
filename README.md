@@ -1,125 +1,101 @@
 <p align="center">
-  <img src="./markshift-icon-rounded.png" width="160" height="160" alt="Markshift app icon">
+  <img src="assets/ytgrab-icon.png" alt="YTGrab app icon" width="180">
 </p>
 
-<h1 align="center">Markshift</h1>
+<h1 align="center">YTGrab</h1>
 
 <p align="center">
-  <strong>Documents to Markdown, privately on-device.</strong>
+  A native macOS utility for downloading YouTube videos as edit-ready MP4 files.
 </p>
 
 <p align="center">
-  A clean SwiftUI app for macOS, iPhone and iPad that converts documents into readable, conversation-ready Markdown without uploading files to a server.
+  <img alt="Version 1.2" src="https://img.shields.io/badge/version-1.2-EA3318">
+  <img alt="macOS 14 or newer" src="https://img.shields.io/badge/macOS-14%2B-16171B?logo=apple">
+  <img alt="Apple Silicon" src="https://img.shields.io/badge/Apple%20Silicon-required-16171B">
+  <img alt="SwiftUI" src="https://img.shields.io/badge/UI-SwiftUI-F7551F">
 </p>
 
-## About
-
-Markshift turns individual documents or mixed-format batches into clean Markdown. Conversion happens locally on the device, making it suitable for private documents, research material, presentations, spreadsheets, notes and AI-ready text preparation.
+YTGrab downloads a video, prepares a Premiere-friendly MP4, and uses Apple's VideoToolbox media engine for fast hardware-accelerated encoding on M-series Macs. `yt-dlp`, Deno, FFmpeg, and FFprobe are included, so no Homebrew packages, plugins, or helper installations are required.
 
 ## Highlights
 
-- Private, on-device document conversion
-- Single-file `.md` saving
-- Mixed-format batch processing with live progress
-- Batch ZIP export with individual Markdown files
-- Combined `All Documents - Conversation Ready.md` output
-- Detailed batch conversion report
-- Drag-and-drop and multiple-file selection
-- Rendered preview and raw Markdown views
-- Copy Markdown directly to the clipboard
-- Retry, cancellation and conversion notes
-- Universal Mac build for Apple Silicon and Intel
+- Native SwiftUI interface for macOS.
+- Detects a video's available resolution, codec, frame rate, HDR status, and duration before download.
+- Offers only the quality levels that are actually available for the selected video.
+- Supports hardware-accelerated encoding with VideoToolbox, plus software encoding when preferred.
+- Produces MP4 files designed to work cleanly with QuickTime and Adobe Premiere Pro.
+- Preserves source colour metadata to avoid unexpected colour shifts.
+- Converts incompatible Opus audio to AAC while copying compatible AAC and MP3 audio when possible.
+- Keeps temporary files beside the chosen output and cleans them up after completion, cancellation, or an error.
+- Includes in-app updates for `yt-dlp` and Deno with checksum and launch validation.
 
-## Supported inputs
+## Requirements
 
-| Category | Formats and handling |
-| --- | --- |
-| PDF | Text extraction and on-device Vision OCR for scanned pages |
-| Word | `.docx`, `.docm` paragraphs, headings, lists and tables |
-| PowerPoint | `.pptx`, `.pptm` slide text and tables |
-| Excel | `.xlsx`, `.xlsm` worksheets and saved formula values |
-| OpenDocument | `.odt`, `.odp`, `.ods` |
-| E-books | EPUB readable content |
-| Images | On-device OCR for supported image formats |
-| Text and data | Markdown, TXT, CSV, TSV, JSON, XML, YAML, HTML and RTF |
-| Other readable files | Best-effort detection for logs, source files and mislabeled Office archives |
+- macOS 14 Sonoma or newer
+- Apple Silicon Mac
 
-## Privacy
+## Install
 
-Markshift processes documents locally. Files and extracted content are not uploaded by the app.
+1. Download `YTGrab-1.2-Apple-Silicon.dmg` from the [latest release](../../releases/latest).
+2. Open the DMG.
+3. Drag **YTGrab** into **Applications**.
+4. Open YTGrab from the Applications folder.
 
-The app uses Apple's system frameworks for PDF processing, text recognition and interface rendering. ZIPFoundation is used to read modern Office and OpenDocument containers and to create batch archives.
+> [!NOTE]
+> The current local build is signed for local use and is not notarized for public distribution. If macOS shows a security warning, Control-click YTGrab, choose **Open**, and confirm once.
 
-## Download and install
+## Use
 
-Download [Markshift 1.0.1 for macOS](./Markshift-1.0.1-macOS.dmg).
+1. Paste a YouTube link.
+2. Select **Check** to inspect the available formats.
+3. Choose the quality and encoding option you want.
+4. Select an output location and start the download.
 
-1. Open `Markshift-1.0.1-macOS.dmg`.
-2. Drag **Markshift** into **Applications**.
-3. Open Markshift from the Applications folder.
+For 4K output, the **Archive** or **High** preset with the media engine is recommended. YouTube generally provides video above 1080p as VP9 or AV1, so 4K output usually requires transcoding instead of a direct H.264 copy.
 
-The current community build is locally signed but not Apple-notarized. If macOS blocks the first launch, open **System Settings → Privacy & Security**, find the Markshift notice and select **Open Anyway**. Only do this when the DMG came from this official repository or another source you trust.
+If a download stops working, use **YTGrab → Check for Tool Updates…**. YouTube changes frequently, and an outdated `yt-dlp` build is a common cause.
 
-### Requirements
+## What's new in 1.2
 
-- macOS 15 or newer
-- Apple Silicon or Intel Mac
-- Xcode is not required to install or use the DMG
+- A compact, centered 720 × 540 main window.
+- A shorter, cleaner layout.
+- An activity log that appears only while it is useful.
+- A dedicated play-and-download YTGrab app icon.
+- A compact About panel containing the CRIT Studio mark.
+- Embedded `yt-dlp`, Deno, FFmpeg, and FFprobe tools.
+- In-app updates for `yt-dlp` and Deno.
 
 ## Build from source
 
-1. Download or clone this repository.
-2. Open `Markshift.xcodeproj` in Xcode 26.6 or newer.
-3. Allow Xcode to resolve the ZIPFoundation Swift package.
-4. Select the **Markshift** scheme.
-5. Choose **My Mac**, an iPhone/iPad Simulator or a connected device.
-6. Press **Run** (`⌘R`).
+Open the Xcode project:
 
-A free Personal Team is sufficient for development and testing on your own devices. Public Developer ID distribution and notarization require Apple Developer Program membership.
-
-The default bundle identifier is `com.kamal.Markshift`. Change it under **Signing & Capabilities** if needed.
-
-## Batch output
-
-A saved batch ZIP contains:
-
-```text
-markdown/
-  Document 1.md
-  Document 2.md
-All Documents - Conversation Ready.md
-Conversion Report.md
+```bash
+open Source/YTGrab-Xcode/YTGrab.xcodeproj
 ```
 
-## Format limitations
+Press **Run** in Xcode. The embedded tools are already part of the project, so there are no packages to install or dependencies to resolve.
 
-Markdown cannot reproduce every part of a visually complex document.
+The project uses ad-hoc signing by default (`CODE_SIGN_IDENTITY = "-"`), which allows local builds without an Apple Developer account. For public distribution, configure your own Developer ID signing and notarization workflow, then re-test the signing of bundled child processes.
 
-- Old binary Office formats (`.doc`, `.ppt`, `.xls`) should first be saved as `.docx`, `.pptx` or `.xlsx`.
-- Slide positioning, charts, transitions and animations become reading-order text or conversion notes.
-- Images and embedded Office objects are reported but are not exported as separate assets.
-- Excel formulas use the last value saved in the workbook; formulas are not recalculated.
-- OCR output should be reviewed for names, numbers and complex tables.
-- Password-protected files must be unlocked before conversion.
+## Embedded tools
 
-## Verification
+YTGrab stores managed copies of its tools in the app's private Application Support directory. The updater retrieves official releases of `yt-dlp` and Deno, verifies the published SHA-256 digest, validates each executable, and replaces the managed copy only after validation succeeds.
 
-Markshift 1.0.1 (build 2) has been verified with:
+FFmpeg and FFprobe remain pinned to the versions tested with each YTGrab release so encoding behaviour does not change unexpectedly.
 
-- Release builds for Apple Silicon and Intel Macs
-- Generic iPhone and iPad Simulator builds
-- Nine conversion and batch-export tests
-- DMG and source-archive integrity checks
+## Third-party licenses
 
-## Dependency
+The app includes third-party components under their respective licenses:
 
-- [ZIPFoundation](https://github.com/weichsel/ZIPFoundation) 0.9.20 — MIT License
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) — The Unlicense
+- [Deno](https://github.com/denoland/deno) — MIT License
+- [FFmpeg](https://ffmpeg.org/) and FFprobe — GNU GPL v3 or later for the bundled build
 
-## Credits
+License notices, the exact FFmpeg build configuration, the GPL text, and relevant upstream source information are included in `Source/YTGrab-Xcode/YTGrab/Licenses` and are also available through **Help → Embedded Tools & Licenses** in the app.
 
-Conceptualized, ideated and designed by **CRIT Studio**  
-Created by **Kamalanarayanan**  
-Contact: [kamalgeek92@gmail.com](mailto:kamalgeek92@gmail.com)
+## Responsible use
+
+Download only content you own or have permission to save. You are responsible for following applicable laws, copyright rules, and the terms of service of the websites you use.
 
 ## Copyright
 
